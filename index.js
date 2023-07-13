@@ -1,5 +1,8 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
+const Circle = require("./lib/circle")
+const Square = require("./lib/square")
+const Triangle = require("./lib/triangle")
 
 
 
@@ -41,7 +44,9 @@ function generateLogo(text, textColor, shape, shapeColor) {
     if (shape === 'circle') {
       logo = new Circle();
     } else if (shape === 'triangle') {
+      logo = new Triangle()
     } else if (shape === 'square') {
+      logo = new Square()
     }
   
     logo.setText(text);
@@ -50,6 +55,15 @@ function generateLogo(text, textColor, shape, shapeColor) {
   
     return logo.render();
   }
+
+  function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
+
   // Function to initialize the SVG logo maker app
 function init() {
     console.log('logo maker');
